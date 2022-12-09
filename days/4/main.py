@@ -1,7 +1,7 @@
 from functools import reduce
 
 
-def parse_sections(to_parse):
+def parse_sections(to_parse) -> list[range]:
     result = []
 
     for value in to_parse.split(','):

@@ -2,7 +2,7 @@ from functools import reduce
 import re
 
 
-def build_stacks(lines_stacks):
+def build_stacks(lines_stacks) -> list[list[str]]:
     max_line = len(max(lines_stacks))
     stack_count = max_line // 4
     stacks: list[list[str]] = [[] for _ in range(stack_count)]
@@ -15,15 +15,15 @@ def build_stacks(lines_stacks):
     return stacks
 
 
-def parse_command(input):
+def parse_command(input) -> tuple[int, ...]:
     return tuple(map(int, regex_command.match(input).groups()))
 
 
-def build_commands(lines_commands):
+def build_commands(lines_commands) -> list[tuple[int, ...]]:
     return list(map(parse_command, lines_commands))
 
 
-def run_commands(lines_stacks, lines_commands, reverse_on_move):
+def run_commands(lines_stacks, lines_commands, reverse_on_move) -> list[list[str]]:
     stacks: list[list[str]] = build_stacks(lines_stacks)
     commands: list[(int, int, int)] = build_commands(lines_commands)
 

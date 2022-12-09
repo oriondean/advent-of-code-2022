@@ -1,4 +1,4 @@
-def find_start_of_message(chars, distinct_count):
+def find_start_of_message(chars, distinct_count) -> int:
     for i, char in enumerate(chars):
         if i < len(chars) - distinct_count:
             if len(set(chars[i: i + distinct_count])) == distinct_count:
