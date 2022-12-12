@@ -9,9 +9,9 @@ def is_valid_move(area: list[list[str]], source: (int, int), target: (int, int))
     return ascii_letters.index(area[t0][t1]) <= ascii_letters.index(area[source[0]][source[1]]) + 1
 
 
-def get_valid_moves(area: list[list[str]], seen, position: (int, int), start) -> list[(int, int)]:
+def get_valid_moves(area: list[list[str]], seen, position: (int, int)) -> list[(int, int)]:
     (row, col) = position
-    moves = list(filter(lambda value: value != start and str(value) not in seen.keys(),
+    moves = list(filter(lambda value: str(value) not in seen.keys(),
                         [(row - 1, col), (row + 1, col), (row, col - 1), (row, col + 1)]))
     return reduce(lambda memo, value: memo + [value] if is_valid_move(area, position, value) else memo, moves, [])
 
@@ -22,7 +22,7 @@ def pathfinder(area: list[list[str]], start, end) -> int:
     distance = 0
 
     while len(moves) > 0 and str(end) not in seen.keys():
-        valid_moves = list(map(lambda value: get_valid_moves(area, seen, value, start), moves))
+        valid_moves = list(map(lambda value: get_valid_moves(area, seen, value), moves))
         moves = list(set([item for sublist in valid_moves for item in sublist]))
         for move in moves:
             seen[str(move)] = distance + 1
